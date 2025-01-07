@@ -1,0 +1,49 @@
+flowchart TD
+    subgraph DIFY["DIFY App"]
+        A[①入力] -->|YouTube URLs改行| B[②CODE_SPLIT]
+        B -->|URL List| D
+
+        subgraph IterationProcess["③イテレーション(並列可)"]
+            
+            D[③-①CODE_Youtube字幕]
+            G[③-②LLM改行]
+            H[③-③テンプレート   （JSONオブジェクト化）]
+            D -->|字幕データ| G
+            G -->|句読点で改行| H
+        end
+
+        I[④CODE_JSON.DUMPS]
+        I -->|JSON文字列| J[⑤End]
+    end
+
+
+    subgraph External["外部サービス"]
+        E[Ngrok] 
+        F[YouTube API サーバ]
+    end
+
+    subgraph ExternalA["Youtube"]
+        K[Youtube] 
+    end
+
+    E <-->|Forward Request| F
+    E <--> |APIコール|D
+    IterationProcess <-->|JSONオブジェクト| I
+    F <--> |字幕取得|K
+
+
+    style External fill:#e6f3ff,stroke:#333,stroke-width:2px
+    style ExternalA fill:#e6f3ff,stroke:#333,stroke-width:2px
+    style DIFY fill:#ffg,stroke:#333,stroke-width:2px
+    style IterationProcess fill:#e60,stroke:#333,stroke-width:2px
+
+    style A fill:#,stroke:#333,stroke-width:2px
+    style B fill:#,stroke:#333,stroke-width:2px
+    style D fill:#,stroke:#333,stroke-width:2px
+    style E fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style F fill:#f9d5e5,stroke:#333,stroke-width:2px
+    style G fill:#,stroke:#333,stroke-width:2px
+    style H fill:#,stroke:#333,stroke-width:2px
+    style I fill:#,stroke:#333,stroke-width:2px
+    style J fill:#,stroke:#333,stroke-width:2px    
+    style K fill:#,stroke:#333,stroke-width:2px

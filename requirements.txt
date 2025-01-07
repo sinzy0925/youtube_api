@@ -1,0 +1,8 @@
+fastapi
+fastapi
+fastapi-cors
+youtube-transcript-api
+langdetect
+python-dateutil
+uvicorn
+pytz

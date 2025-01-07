@@ -1,0 +1,6 @@
+/venv/*
+/build/*
+/build/youtube_apiA/*
+/build*
+/build/youtube_apiA*
+*.spec
